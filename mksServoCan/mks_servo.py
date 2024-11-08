@@ -333,16 +333,16 @@ class MksServo:
                     logging.error(f"CRC check failed for the message: {e}")
 
         try:
-            self.notifier.add_listener(receive_message)
+            #self.notifier.add_listener(receive_message)
             self.bus.send(msg)
         except can.CanError as e:
             raise CanMessageError(f"Error sending message: {e}")
 
         # Wait for response (with a timeout)
-        start_time = time.perf_counter()
-        while (time.perf_counter() - start_time < self.timeout) and status == None:
-            time.sleep(0.1)  # Small sleep to prevent busy waiting
-        self.notifier.remove_listener(receive_message)
+        #start_time = time.perf_counter()
+        #while (time.perf_counter() - start_time < self.timeout) and status == None:
+        #    time.sleep(0.1)  # Small sleep to prevent busy waiting
+        #self.notifier.remove_listener(receive_message)
 
         return status
 

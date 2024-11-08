@@ -21,7 +21,7 @@ class Motor(MksServo):
         super().__init__(controller.controlBus, controller.notifier, id_)
         if runConfig:
             self.configure(motorType)
-        self.speed = 10      
+        self.speed = 10
         self.acceleration = 100
         self.ID = id_
 
@@ -31,4 +31,7 @@ class Motor(MksServo):
 
     def run_n_MotorTurns(self, n: int):
         print("Run {} turns".format(n))
-        super().run_motor_relative_motion_by_axis(self.speed, self.acceleration, int(((0x4000) * n)) )
+        super().wait_for_motor_idle(60)
+        super().run_motor_relative_motion_by_axis(
+            self.speed, self.acceleration, int(((0x4000) * n))
+        )

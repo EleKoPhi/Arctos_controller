@@ -189,7 +189,7 @@ def run_motor_relative_motion_by_pulses(self, direction: Direction, speed, accel
 def run_motor_absolute_motion_by_pulses(self, speed, acceleration, absolute_pulses):
     """
     The motor runs to the specified position with the set acceleration and speed.
-
+d
     Args:
         speed (int): The speed in the range of 0 to 3000 RPMs.
         acceleration (int): The acceleration in the range of 0 to 255.

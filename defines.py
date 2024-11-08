@@ -19,26 +19,28 @@ reductionRatios[C] = 67.82
 from enum import Enum
 
 
-class AxisIdentifiers(Enum):
+class AxisId(Enum):
     X = "X"
     Y = "Y"
     Z = "Z"
-
     A = "A"
     B = "B"
     C = "C"
+
+    def getIds():
+        return [AxisId.X, AxisId.Y, AxisId.Z, AxisId.A, AxisId.B, AxisId.C]
 
 
 class MotorIDs:
     IDs = [1, 2, 3, 4, 5, 6]
 
-    ID2Axis = {
-        AxisIdentifiers.X: 2,
-        AxisIdentifiers.Y: 1,
-        AxisIdentifiers.Z: 3,
-        AxisIdentifiers.A: 4,
-        AxisIdentifiers.B: [5, 6],
-        AxisIdentifiers.C: [5, 6],
+    IdAxisMap = {
+        AxisId.X: 2,
+        AxisId.Y: 1,
+        AxisId.Z: 3,
+        AxisId.A: 4,
+        AxisId.B: [5, 6],
+        AxisId.C: [5, 6],
     }
 
     def idToMotorType(id):
@@ -48,14 +50,18 @@ class MotorIDs:
             return MotorType.MKS42
 
 
+class EndStopOffset:
+    offset = {AxisId.X: -123}
+
+
 class gearBoxRatios:
     ratios = {}
-    ratios[AxisIdentifiers.X] = 13.50
-    ratios[AxisIdentifiers.Y] = 150.00
-    ratios[AxisIdentifiers.Z] = 150.00
-    ratios[AxisIdentifiers.A] = 48.00
-    ratios[AxisIdentifiers.B] = 67.82
-    ratios[AxisIdentifiers.C] = 67.82
+    ratios[AxisId.X] = 13.50
+    ratios[AxisId.Y] = 150.00
+    ratios[AxisId.Z] = 150.00
+    ratios[AxisId.A] = 48.00
+    ratios[AxisId.B] = 67.82
+    ratios[AxisId.C] = 67.82
 
 
 class MotorType(Enum):
@@ -63,9 +69,17 @@ class MotorType(Enum):
     MKS57 = 1
 
 
-class ArrangementTypes:
+class MotorSetting:
     Parallel = 0
     Inverse = 1
+
+    Mapping = {}
+    Mapping[AxisId.X] = Parallel
+    Mapping[AxisId.Y] = Parallel
+    Mapping[AxisId.Z] = Parallel
+    Mapping[AxisId.A] = Parallel
+    Mapping[AxisId.B] = Parallel
+    Mapping[AxisId.C] = Inverse
 
 
 class DefaultMotorSettings:
